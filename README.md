@@ -2,12 +2,12 @@
   <img
     width="200"
     height="200"
-    src="https://imgur.com/gallery/starling-n5BbFbG"
+    src="https://i.imgur.com/qFzasxC.png"
     alt="Project logo"
   >
 </p>
-<h1 align="center">MLOps Pipeline</h1>
+<h1 align="center">⭐Starling⭐</h1>
 
 <p align="center">
-  A hands-on project for learning and practicing MLOps concepts.
+  Beyond Static Models: Evaluating Drift-Aware Retraining for Time-Series Anomaly Detection
 </p>
