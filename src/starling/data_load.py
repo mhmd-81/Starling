@@ -13,7 +13,7 @@ def load_channel(chan_id, data_dir="data"):
     data_dir = Path(data_dir)
 
     train_data=np.load(data_dir / "train" / f"{chan_id}.npy")[:, 0]
-    test_data=np.load(data_dir/ "test" f"{chan_id}.npy")[:,0]
+    test_data=np.load(data_dir/ "test" / f"{chan_id}.npy")[:,0]
     labels = pd.read_csv(f"{data_dir}/labeled_anomalies.csv")
     rows = labels[labels["chan_id"] == chan_id]
     intervals = []
