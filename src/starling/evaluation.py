@@ -14,9 +14,9 @@ def point_metrics(pred, truth, valid=None):
     fn = int((~p & t).sum())
     tn = int((~p & ~t).sum())
 
-    precision = tp / (tp + fp) if tp + fp else 0.0
-    recall = tp / (tp + fn) if tp + fn else 0.0
-    f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
+    precision = tp / (tp + fp) if tp + fp else float("nan")   # nothing flagged: undefined
+    recall = tp / (tp + fn) if tp + fn else float("nan")      # nothing labeled: undefined
+    f1 = 2 * tp / (2 * tp + fp + fn) if (2 * tp + fp + fn) else float("nan")
     fpr = fp / (fp + tn) if fp + tn else 0.0
     return {"tp": tp, "fp": fp, "fn": fn, "tn": tn,
             "precision": precision, "recall": recall, "f1": f1, "fpr": fpr}
