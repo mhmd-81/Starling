@@ -1,12 +1,8 @@
 import numpy as np
-
+from sklearn.metrics import roc_auc_score
 
 def point_metrics(pred, truth, valid=None):
-    """Point-level precision, recall, F1 and false-positive rate.
-
-    valid: optional boolean mask of points that received a verdict. Warm-up
-    points (NaN scores) are left out of scoring rather than counted as normal.
-    """
+    
     pred = np.asarray(pred, bool)
     truth = np.asarray(truth, bool)
     if valid is None:
@@ -27,10 +23,7 @@ def point_metrics(pred, truth, valid=None):
 
 
 def event_metrics(pred, intervals):
-    """Score each labeled interval separately. Overlapping intervals are not merged.
 
-    delay = steps from the interval start to the first flag inside it.
-    """
     pred = np.asarray(pred, bool)
     events = []
     for start, end in intervals:
@@ -46,8 +39,19 @@ def event_metrics(pred, intervals):
 
 
 def count_segments(mask):
-    """Number of separate runs of consecutive True values."""
     mask = np.asarray(mask, bool)
     if mask.size == 0:
         return 0
     return int((mask[1:] & ~mask[:-1]).sum() + mask[0])
+
+
+def auc_score(scores, truth, valid=None):
+
+    scores = np.asarray(scores, float)
+    truth = np.asarray(truth, bool)
+    if valid is None:
+        valid = ~np.isnan(scores)
+    s, t = scores[valid], truth[valid]
+    if t.all() or not t.any():
+        return float("nan")
+    return float(roc_auc_score(t, s))
