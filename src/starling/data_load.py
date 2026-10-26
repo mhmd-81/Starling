@@ -16,6 +16,8 @@ def load_channel(chan_id, data_dir="data"):
     test_data=np.load(data_dir/ "test" / f"{chan_id}.npy")[:,0]
     labels = pd.read_csv(f"{data_dir}/labeled_anomalies.csv")
     rows = labels[labels["chan_id"] == chan_id]
+    if rows.empty:
+        raise ValueError(f"{chan_id} has no annotation row; excluded from labeled benchmark")
     intervals = []
     for s in rows["anomaly_sequences"]:
         intervals.extend(ast.literal_eval(s))
