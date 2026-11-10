@@ -10,6 +10,7 @@ def labled_channels(data_dir='data'):
     return sorted(labels["chan_id"].unique())
 
 def main():
+    """accepting different kind of args for model run"""
     parser = argparse.ArgumentParser(description='running baselines on channel ids')
     parser.add_argument("--methods", nargs='+', default=['roaling_median', 'linear'])
     parser.add_argument("--channels", nargs="*", default=None, help='useing all channels as default')
