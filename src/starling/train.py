@@ -20,3 +20,6 @@ def main():
     parser.add_argument("--fit-frac", type=int, default=0.8)
     parser.add_argument("--data-dir", default='data')
     args = parser.parse_args()
+
+    channels = args.channels or labled_channels(args.data_dir)
+    batch_id = datetime.now().strftime("%Y%m%d-%H%M%S")
