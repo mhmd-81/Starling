@@ -23,3 +23,14 @@ def main():
 
     channels = args.channels or labled_channels(args.data_dir)
     batch_id = datetime.now().strftime("%Y%m%d-%H%M%S")
+
+    print(f"batch {batch_id}: {len(channels)} channels x {len(args.methods)} methods")
+
+    failed = {}
+    for method in args.methods:
+        for chan in channels:
+            try:
+                result = run_channel(chan, method=method, window=args.window, lag=args.lag,
+                                        q=args.q, fit_frac=args.fit_frac, data_dir=args.data_dir)
+            except:
+                    
