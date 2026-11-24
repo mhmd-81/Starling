@@ -1,6 +1,6 @@
 import mlflow
 
-def log_run(result, experiment="starling-base", tracking_uri="sqlite:///mlflow.db"):
+def log_run(result, experiment="starling-baselines", tracking_uri="sqlite:///mlflow.db", tags=None):
     mlflow.set_tracking_uri(tracking_uri)
     mlflow.set_experiment(experiment)
 
@@ -15,6 +15,9 @@ def log_run(result, experiment="starling-base", tracking_uri="sqlite:///mlflow.d
         "tags" : None
     }
 
-    with mlflow.start_run(run_name=f"{p['method']}-{p['chan_id']}"):
+    with mlflow.start_run(run_name=f"{p['method']}-{p['chan_id']}-q{p['q']}"):
+        if tags:
+            mlflow.set_tags(tags)
         mlflow.log_params(p)
+        mlflow.log_metrics(...)   
         mlflow.log_metrics({k: float(v) for k, v in metrics.items() if v == v})
