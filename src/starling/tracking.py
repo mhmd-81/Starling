@@ -12,6 +12,7 @@ def log_run(result, experiment="starling-base", tracking_uri="sqlite:///mlflow.d
         "false_alarm_segments": result["false_alarm_segments"],
         "events_detected": sum(e["detected"] for e in result["events"]),
         "n_events": len(result["events"]),
+        "tags" : None
     }
 
     with mlflow.start_run(run_name=f"{p['method']}-{p['chan_id']}"):
