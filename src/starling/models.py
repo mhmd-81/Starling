@@ -10,7 +10,7 @@ def make_windows(x,lag):
     return x[idx], x[lag:]
 
 
-class Linear_model():
+class LinearForecaster():
     def __init__(self,lag=32):
         self.lag = lag
         self.model = LinearRegression()

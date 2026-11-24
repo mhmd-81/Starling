@@ -3,7 +3,7 @@ import numpy as np
 from starling.data_load import load_channel
 from starling.detectors import trailing_deviation
 from starling.evaluation import auc_score, count_segments, event_metrics, point_metrics
-from starling.models import Linear_model
+from starling.models import LinearForecaster
 from starling.splitter import time_split
 from starling.thresholds import fit_threshold, flag
 
@@ -12,7 +12,7 @@ def build_scorer(method, fit_signal, window=101, lag=32):
     if method == "rolling_median":
         return lambda x: trailing_deviation(x, window)
     if method == "linear":
-        return Linear_model(lag).fit(fit_signal).score
+        return LinearForecaster(lag).fit(fit_signal).score
     raise ValueError(f"unknown method: {method}")
 
 
