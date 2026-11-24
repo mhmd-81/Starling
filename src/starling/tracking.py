@@ -19,5 +19,5 @@ def log_run(result, experiment="starling-baselines", tracking_uri="sqlite:///mlf
         if tags:
             mlflow.set_tags(tags)
         mlflow.log_params(p)
-        mlflow.log_metrics(...)   
+        mlflow.log_metrics({k: float(v) for k, v in metrics.items() if v == v})
         mlflow.log_metrics({k: float(v) for k, v in metrics.items() if v == v})
