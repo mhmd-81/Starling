@@ -12,7 +12,7 @@ def labled_channels(data_dir='data'):
 def main():
     """accepting different kind of args for model run"""
     parser = argparse.ArgumentParser(description='running baselines on channel ids')
-    parser.add_argument("--methods", nargs='+', default=['roaling_median', 'linear'])
+    parser.add_argument("--methods", nargs='+', default=['rolling_median', 'linear'])
     parser.add_argument("--channels", nargs="*", default=None, help='useing all channels as default')
     parser.add_argument("--q", type=float, default=0.99)
     parser.add_argument("--window", type=int, default=101)
