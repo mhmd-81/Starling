@@ -31,6 +31,16 @@ def main():
         for chan in channels:
             try:
                 result = run_channel(chan, method=method, window=args.window, lag=args.lag,
-                                        q=args.q, fit_frac=args.fit_frac, data_dir=args.data_dir)
-            except:
-                    
+                                     q=args.q, fit_frac=args.fit_frac, data_dir=args.data_dir)
+                log_run(result, tags={"batch_id": batch_id})
+                print(f"  {method:15s} {chan:5s} f1={result['point']['f1']:.3f}  auc={result['auc']:.3f}")
+            
+            except Exception as e:
+                failed[(method, chan)] = str(e)[:80]
+                print(f"  {method:15s} {chan:5s} FAILED: {failed[(method, chan)]}")
+
+    print(f"done. batch_id={batch_id} | failed: {len(failed)}")
+
+
+if __name__ == "__main__":
+    main()
